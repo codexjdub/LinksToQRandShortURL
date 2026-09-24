@@ -8,7 +8,7 @@ Open the [live Link Sheet app](https://codexjdub.github.io/LinksToQRandShortURL/
 
 The backend must have `PAGES_ORIGIN` set to the exact Pages origin, such as `https://codexjdub.github.io`. This is configured on the Link Sheet Site, not in this public repository. The backend accepts requests from that origin and its own site only.
 
-You can also download `index.html` as a single file from the [latest release](https://github.com/codexjdub/LinksToQRandShortURL/releases/latest). QR creation, preview, SVG download, and printing work locally. Shortening requires the published website; local files cannot safely use the hosted shortening backend without exposing its access to other websites.
+You can also save `index.html` as a single file from this repository or extract it from the [latest release's source archive](https://github.com/codexjdub/LinksToQRandShortURL/releases/latest). QR creation, preview, SVG download, and printing work locally. Shortening requires the published website; local files cannot safely use the hosted shortening backend without exposing its access to other websites.
 
 ## Project files
 
