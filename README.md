@@ -4,11 +4,11 @@ Create a large QR code, shorten its destination URL, and print the QR code, shor
 
 ## Use on GitHub Pages
 
-The complete webpage is [`index.html`](index.html). Publish the repository's `main` branch from the root (`/`) in **Settings → Pages**. GitHub Pages serves the static page; the existing Link Sheet backend at `https://link-sheet-qr.w42425.chatgpt.site/api/shorten` handles shortening because CleanURI does not support direct browser requests from this page.
+Open the [live Link Sheet app](https://codexjdub.github.io/LinksToQRandShortURL/). The complete webpage is [`index.html`](index.html), published from the repository's `main` branch at the root (`/`). GitHub Pages serves the static page; the existing Link Sheet backend at `https://link-sheet-qr.w42425.chatgpt.site/api/shorten` handles shortening because CleanURI does not support direct browser requests from this page.
 
 The backend must have `PAGES_ORIGIN` set to the exact Pages origin, such as `https://codexjdub.github.io`. This is configured on the Link Sheet Site, not in this public repository. The backend accepts requests from that origin and its own site only.
 
-You can also download `index.html` as a single file. QR creation, preview, SVG download, and printing work locally. Shortening requires the published website; local files cannot safely use the hosted shortening backend without exposing its access to other websites.
+You can also download `index.html` as a single file from the [latest release](https://github.com/codexjdub/LinksToQRandShortURL/releases/latest). QR creation, preview, SVG download, and printing work locally. Shortening requires the published website; local files cannot safely use the hosted shortening backend without exposing its access to other websites.
 
 ## Project files
 
