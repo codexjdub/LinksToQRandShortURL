@@ -1,27 +1,9 @@
 # Link Sheet
 
-Create a large QR code, shorten its destination URL, and print the QR code, short link, and original URL on one US Letter page. The preview matches the print sheet. No account or API key is needed to use the published page.
+Create a large QR code, shorten its destination URL, and print the QR code, short link, and original URL on one US Letter page. The preview matches the print sheet.
 
-## Use on GitHub Pages
+Open the [live app on GitHub Pages](https://codexjdub.github.io/LinksToQRandShortURL/). The entire app is [`index.html`](index.html): HTML, styles, QR generation, and printing are in that one file. You can also save it to your computer and open it directly. No login, API key, build step, or server is needed.
 
-Open the [live Link Sheet app](https://codexjdub.github.io/LinksToQRandShortURL/). The complete webpage is [`index.html`](index.html), published from the repository's `main` branch at the root (`/`). GitHub Pages serves the static page; the existing Link Sheet backend at `https://link-sheet-qr.w42425.chatgpt.site/api/shorten` handles shortening because CleanURI does not support direct browser requests from this page.
-
-The backend must have `PAGES_ORIGIN` set to the exact Pages origin, such as `https://codexjdub.github.io`. This is configured on the Link Sheet Site, not in this public repository. The backend accepts requests from that origin and its own site only.
-
-You can also save `index.html` as a single file from this repository or extract it from the [latest release's source archive](https://github.com/codexjdub/LinksToQRandShortURL/releases/latest). QR creation, preview, SVG download, and printing work locally. Shortening requires the published website; local files cannot safely use the hosted shortening backend without exposing its access to other websites.
-
-## Project files
-
-- `index.html` — the complete static page, including styles, app code, and the bundled QR generator.
-- `src/worker.mjs` — the backend that validates URLs and calls CleanURI.
-- `scripts/build.mjs` — embeds `index.html` in the backend build for the existing hosted site.
-- `tests/backend.test.mjs` — backend behavior and origin checks.
-- `.openai/hosting.json` — identifies the existing hosted Site used for the shortening backend.
-
-Run `npm test` to check the backend and `npm run build` to create the ignored `dist/server/index.js` deployment artifact. Node.js 20 or newer is sufficient; there are no npm dependencies.
-
-## How shortening works
-
-When you select Generate on the published page, the browser sends the URL to the hosted backend. The backend sends it to [CleanURI](https://cleanuri.com/docs) and returns the resulting short link. If shortening fails, the page still creates a QR code for the original URL and shows a warning. The Worker never visits the submitted destination. It bounds request size and URL length, caches successful results temporarily, and paces requests to the provider.
+When you select Generate, the browser sends the URL to [Spoo.me](https://spoo.me/api) for shortening. If that service is unavailable, it tries [Shrtr](https://shrtr.top/api). Both services allow browser requests without an API key. Shortening needs an internet connection and is subject to their rate limits. If both fail, the QR code still opens the original URL and the page shows a warning. QR creation, SVG download, preview, and printing work offline.
 
 The bundled [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) 1.4.4 code is by Kazuhiko Arase under the MIT license; its copyright and license notice are included in `index.html`.
