@@ -10,7 +10,7 @@
 :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#15213a;background:#eef2f8;font-synthesis:none;line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,a:focus-visible{outline:3px solid #7298ff;outline-offset:4px}header{max-width:1180px;margin:auto;padding:30px 34px;display:flex;align-items:center;gap:12px;font-size:20px;font-weight:750;letter-spacing:-.5px}.mark{display:grid;place-items:center;width:34px;height:34px;background:#2453de;border-radius:9px;color:#fff;font-size:24px}.header-note{margin-left:auto;font-size:14px;color:#566178;font-weight:450;letter-spacing:0}main{max-width:1180px;margin:20px auto 60px;padding:0 34px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:start}.editor{padding-top:32px}.eyebrow{font-size:13px;font-weight:750;letter-spacing:1.4px;color:#2453de;text-transform:uppercase}h1{font-size:clamp(32px,4vw,46px);line-height:1.1;letter-spacing:-1.7px;margin:14px 0 18px;max-width:430px}.intro{color:#566178;font-size:17px;max-width:380px;margin-bottom:32px}label{display:block;font-size:15px;font-weight:650;margin-bottom:10px}input[type=text]{width:100%;background:white;border:1px solid #bbc5d8;border-radius:10px;padding:15px;color:#15213a;outline:none}input[type=text]:focus{border-color:#2453de;box-shadow:0 0 0 3px #2453de20}input[aria-invalid=true]{border-color:#b42318}.primary{border:0;border-radius:10px;padding:15px 24px;background:#2453de;color:white;font-weight:650}.generate{width:100%;margin-top:14px}.privacy{font-size:13px;color:#66728a;margin:13px 0 0}.status{font-size:14px;min-height:44px;margin-top:20px;color:#4c5970}.status.error{color:#a52a23}.status.warning{color:#855108}.print-button{width:100%;margin-top:14px;background:#15213a}.actions{display:flex;gap:12px;margin-top:12px}.secondary{background:white;border:1px solid #cbd3e1;border-radius:9px;padding:12px 16px;font-size:14px;font-weight:600;flex:1}.print-hint{font-size:13px;color:#66728a;margin-top:18px}.preview-caption{display:flex;justify-content:space-between;font-size:13px;color:#566178;margin-bottom:12px}.paper{background:white;border:1px solid #dae0e9;border-radius:4px;padding:34px 30px;box-shadow:0 14px 45px #253c6010;min-width:0;text-align:center}.paper h2{font-size:24px;letter-spacing:-.5px;margin:0 0 16px}.qr{width:min(100%,340px);aspect-ratio:1;margin:0 auto 22px;display:grid;place-items:center}.qr svg{display:block;width:100%;height:100%}.placeholder{border:2px dashed #d7dfed;background:#f8faff;border-radius:10px;color:#7d8aa1;padding:40px;font-size:16px}.placeholder span{max-width:190px}.link-label{font-size:12px;font-weight:750;letter-spacing:1.3px;color:#69768c;text-transform:uppercase;margin-bottom:5px}.short-link{font-size:clamp(19px,2.5vw,26px);font-weight:700;color:#15213a;text-decoration:none;overflow-wrap:anywhere}.original-block{border-top:1px solid #e6eaf0;margin-top:24px;padding-top:18px}.original-link{display:block;font-size:14px;color:#566178;overflow-wrap:anywhere;text-decoration:none;line-height:1.5}.paper-note{font-size:13px;color:#68758b;margin:8px 0 0}.empty .link-value{color:#8995a9}.no-short .short-link{font-size:17px;font-weight:500}.print-empty{display:none}@media(max-width:760px){header{padding:22px}.header-note{font-size:12px}main{grid-template-columns:1fr;gap:30px;padding:0 22px;margin-top:0}.editor{padding-top:8px}h1{max-width:none}.intro{max-width:none;margin-bottom:24px}.paper{padding:24px 18px}.status{min-height:0}.qr{max-width:330px}}.print-sheet{display:none}
 .paper.has-preview{aspect-ratio:8.5/11;padding:0;display:grid;place-items:center;overflow:hidden}
 .paper.has-preview > :not(.sheet-preview){display:none}
-.paper .sheet-preview{display:block;width:100%;height:100%;object-fit:contain}
+.paper .sheet-preview{display:block;width:100%;height:100%;object-fit:contain}.sheet-preview a{cursor:pointer}.sheet-preview a:hover text,.sheet-preview a:focus-visible text{text-decoration:underline}
 .input-divider{text-align:center;color:#69768c;font-size:13px;margin:14px 0 8px}.qr-import{border:2px dashed #bbc9e8;border-radius:10px;padding:16px;background:#f8faff;text-align:center;color:#566178;font-size:14px}.qr-import:focus-visible,.qr-import.dragover{border-color:#2453de;outline:3px solid #2453de20;outline-offset:2px}.qr-import p{margin:0 0 10px}.qr-import .secondary{display:inline-block;flex:none;padding:8px 16px}
 @page{size:letter portrait;margin:12mm}
 @media print{
@@ -48,7 +48,7 @@
 <p class="print-hint">Prints on one US Letter sheet (8.5 × 11 in). If your print dialog chooses another size, select US Letter.</p>
 </section>
 <section aria-label="Print preview">
-<div class="preview-caption"><span>YOUR PRINT SHEET</span><span>US Letter</span></div>
+<div class="preview-caption"><span>YOUR PRINT SHEET</span><span>US Letter · click URLs to verify</span></div>
 <article class="paper empty" id="paper">
 <h2>Scan to open</h2>
 <div class="qr placeholder" id="qr"><span>Your QR code will appear here</span></div>
@@ -2525,10 +2525,11 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     const ns = 'http://www.w3.org/2000/svg';
     const sheet = document.createElementNS(ns, 'svg');
     sheet.setAttribute('xmlns', ns);
-    const addText = (text, y, size, weight = 'normal') => {
+    const addText = (text, y, size, weight = 'normal', previewHref = '') => {
       const node = document.createElementNS(ns, 'text');
       for (const [key, value] of Object.entries({x:370, y, 'text-anchor':'middle', 'font-family':'Arial, sans-serif', 'font-size':size, 'font-weight':weight, fill:'#000'})) node.setAttribute(key, value);
       node.textContent = text;
+      if (previewHref) node.setAttribute('data-preview-href', previewHref);
       sheet.appendChild(node);
     };
     addText('Scan to open', 38, 30, 'bold');
@@ -2536,9 +2537,10 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     for (const [key, value] of Object.entries({x:40,y:58,width:660,height:660})) qr.setAttribute(key,value);
     sheet.appendChild(document.importNode(qr, true));
     addText('SHORTENED URL', 758, 15, 'bold');
-    addText(short || 'Unavailable', 806, short ? 38 : 26, short ? 'bold' : 'normal');
+    addText(short || 'Unavailable', 806, short ? 38 : 26, short ? 'bold' : 'normal', short || '');
     let y = 852;
-    if (!short) { addText('This QR code opens the original URL.', y, 15); y += 27; }
+    addText('This QR code opens the original URL.', y, 15);
+    y += 27;
     addText('ORIGINAL URL', y, 15, 'bold');
     y += 32;
     const fontSize = original.length > 500 ? 13 : 22;
@@ -2547,11 +2549,11 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     let line = '';
     for (const char of original) {
       if (line && context.measureText(line + char).width > 690) {
-        addText(line, y, fontSize); y += fontSize * 1.3; line = '';
+        addText(line, y, fontSize, 'normal', original); y += fontSize * 1.3; line = '';
       }
       line += char;
     }
-    if (line) { addText(line, y, fontSize); y += fontSize * 1.3; }
+    if (line) { addText(line, y, fontSize, 'normal', original); y += fontSize * 1.3; }
     const height = Math.max(980, Math.ceil(y + 28));
     sheet.setAttribute('viewBox', '0 0 740 ' + height);
     const widthMM = Math.min(185, 245 * 740 / height);
@@ -2562,17 +2564,27 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(sheet));
     await image.decode();
     $('print-sheet').replaceChildren(image);
-    const preview = image.cloneNode(true);
-    preview.className = 'sheet-preview';
-    preview.removeAttribute('style');
-    preview.alt = 'Preview of the printed QR code, shortened URL, and original URL';
+    const preview = sheet.cloneNode(true);
+    preview.classList.add('sheet-preview');
+    preview.setAttribute('aria-label', 'Preview of the printed QR code, shortened URL, and original URL');
+    for (const text of preview.querySelectorAll('[data-preview-href]')) {
+      const href = text.getAttribute('data-preview-href');
+      text.removeAttribute('data-preview-href');
+      const link = document.createElementNS(ns, 'a');
+      link.setAttribute('href', href);
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      link.setAttribute('aria-label', 'Open ' + href);
+      text.replaceWith(link);
+      link.appendChild(text);
+    }
     $('paper').querySelector('.sheet-preview')?.remove();
     $('paper').appendChild(preview);
     $('paper').classList.add('has-preview');
     document.body.classList.add('has-result');
   }
   async function render(original, short) {
-    const target = short || original;
+    const target = original;
     const code = qrcode(0, 'M');
     code.addData(target, 'Byte');
     code.make();
@@ -2586,7 +2598,7 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     if (short) $('short').href = short; else $('short').removeAttribute('href');
     $('original').textContent = original;
     $('original').href = original;
-    $('note').hidden = !!short;
+    $('note').hidden = false;
     $('note').textContent = 'This QR code opens the original URL.';
     $('paper').className = 'paper' + (short ? '' : ' no-short') + (original.length > 500 ? ' long-url' : '');
     await preparePrint(original, short, svg);
@@ -2610,7 +2622,7 @@ c._disableBarcodeDetector=!1;c._workerMessageId=0;var e=Object.freeze({__proto__
     try { short = await shorten(original); } catch (error) { warning = error.message; }
     try {
       await render(original, short);
-      setStatus(short ? 'Ready to print. The QR code opens your short link.' : warning + ' Your QR code uses the original URL.', short ? '' : 'warning');
+      setStatus(short ? 'Ready to print. The QR code opens the original URL; click either preview link to verify it.' : warning + ' Your QR code uses the original URL.', short ? '' : 'warning');
       return {originalUrl: original, shortenedUrl: short, qrTarget: result.target};
     } catch {
       result = null;
